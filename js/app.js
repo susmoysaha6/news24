@@ -65,7 +65,8 @@ const displayNews = (categoriesNews) => {
                                     <p class="text-warning">${categoryNews.rating.number} <i class="bi bi-star-fill"></i></p>
                                 </div>
                                 <div>
-                                    <a onclick="loadDetails()" href=""><i class="bi bi-arrow-right"></i></a>
+                                    <button class="btn btn-info text-white" onclick="loadDetails('${categoryNews._id}')">
+                                    <i class="bi bi-arrow-right"></i></button>
                                 </div>
                             </div>
                             </div>
@@ -76,6 +77,12 @@ const displayNews = (categoriesNews) => {
         newsContainer.appendChild(newsDiv);
     })
 }
-
+const loadDetails = (news_id) => {
+    const url = `https://openapi.programming-hero.com/api/news/${news_id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => console.log(data.data))
+        .catch(err => clg(err));
+}
 loadCategories();
 loadNews('');
