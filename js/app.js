@@ -25,33 +25,42 @@ const loadNews = (category_id) => {
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => displayNews(data))
+        .then(data => displayNews(data.data))
         .catch(err => console.log(err));
     toggleSpinner(true);
 }
 // display category wise news
 const displayNews = (categoriesNews) => {
+    categoriesNews.sort((a, b) => {
+        return b.total_view - a.total_view;
+    })
     console.log(categoriesNews);
-    const categoriesNewsData = categoriesNews.data;
     const newsContainer = document.getElementById('news-conatainer');
     const newsCount = document.getElementById('news-count');
+
     newsContainer.textContent = '';
     newsCount.textContent = '';
-    categoriesNewsData.forEach(categoryNews => {
+    if (categoriesNews.length > 0) {
+        newsCount.innerHTML = `${categoriesNews.length} News found for this categories`
+    } else {
+        newsCount.innerHTML = `No news found`
+    }
+    categoriesNews.forEach(categoryNews => {
         console.log(categoryNews);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('card');
         newsDiv.classList.add('mb-3');
-        newsCount.innerText = `${categoriesNews.status === 'false' ? 'No News Found' : categoriesNewsData.length + ' News found for this categories'}`;
+        // newsCount.innerText = `${categoriesNews === [] ? 'No News Found' : categoriesNews.length + ' News found for this categories'}`;
+        // newsCount.innerText = `${categoryNews.category_id === '06' ? 'No News Found' : categoriesNewsData.length + ' News found for this categories'}`;
         newsDiv.innerHTML = `
         <div class="row g-0 shadow-lg">
                     <div class="col-md-4">
                         <img src="${categoryNews.thumbnail_url}" class="w-100" alt="...">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8 pt-5">
                         <div class="card-body">
-                            <h5 class="card-title">${categoryNews.title}</h5>
-                            <p class="card-text">${categoryNews.details.length > 200 ? categoryNews.details.slice(0, 200) + '...' : categoryNews.details}</p>
+                            <h5 class="card-title ps-5">${categoryNews.title}</h5>
+                            <p class="card-text ps-5">${categoryNews.details.length > 200 ? categoryNews.details.slice(0, 200) + '...' : categoryNews.details}</p>
                             <div>
                             <div class="d-flex justify-content-around align-items-center mt-5">
                                 <div class="d-flex align-items-center">
@@ -60,15 +69,15 @@ const displayNews = (categoriesNews) => {
                                     </div>
                                     <div class="ps-2 text-muted">
                                         <p>
-                                            <small>${categoryNews.author.name}</small>
+                                            <small>${categoryNews.author?.name ? categoryNews.author?.name : 'No Name Found'}</small>
                                         </p>
                                         <p><small>
-                                        ${categoryNews.author.published_date}
+                                        ${categoryNews.author?.published_date ? categoryNews.author?.published_date : 'No Date Found'}
                                         </small></p>
                                     </div>
                                 </div>
                                 <div>
-                                    <p><i class="bi bi-eye"></i> ${categoryNews.total_view}</p>
+                                    <p><i class="bi bi-eye"></i> ${categoryNews.total_view ? categoryNews.total_view : 'No Data Available'}</p>
                                 </div>
                                 <div>
                                     <p class="text-warning">${categoryNews.rating.number} <i class="bi bi-star-fill"></i></p>
@@ -85,6 +94,7 @@ const displayNews = (categoriesNews) => {
         </div>
         `;
         newsContainer.appendChild(newsDiv);
+
     })
     toggleSpinner(false);
 }
@@ -112,8 +122,8 @@ const displayDetails = (details) => {
     newsTitle.innerText = `${details[0].title}`
     detailsContainer.innerHTML = `
     <div class="text-center">
-        <p>Author: ${details[0].author ? details[0].author.name : 'No Result found'}</p>
-        <img style="width:50px;" src="${details[0].author ? details[0].author.img : 'No Result found'}" alt="" />
+        <p>Author: ${details[0].author.name ? details[0].author.name : 'No Result found'}</p>
+        <img style="width:50px;" src="${details[0].author?.img ? details[0].author.img : 'No Result found'}" alt="" />
         <p>Publish Date: ${details[0].author ? details[0].author.published_date : 'No Result found'}</p>
     </div>
     <div class="d-flex justify-content-between" >
