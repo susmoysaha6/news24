@@ -4,7 +4,7 @@ const loadCategories = () => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayCategories(data.data.news_category))
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
 }
 // display categories 
 const displayCategories = (categories) => {
@@ -41,37 +41,35 @@ const displayNews = (categoriesNews) => {
     newsContainer.textContent = '';
     newsCount.textContent = '';
     if (categoriesNews.length > 0) {
-        newsCount.innerHTML = `${categoriesNews.length} News found for this categories`
+        newsCount.innerHTML = `${categoriesNews.length} News found for this categories`;
     } else {
-        newsCount.innerHTML = `No news found`
+        newsCount.innerHTML = `No news found`;
     }
     categoriesNews.forEach(categoryNews => {
         console.log(categoryNews);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('card');
         newsDiv.classList.add('mb-3');
-        // newsCount.innerText = `${categoriesNews === [] ? 'No News Found' : categoriesNews.length + ' News found for this categories'}`;
-        // newsCount.innerText = `${categoryNews.category_id === '06' ? 'No News Found' : categoriesNewsData.length + ' News found for this categories'}`;
+
         newsDiv.innerHTML = `
         <div class="row g-0 shadow-lg">
                     <div class="col-md-4">
-                        <img src="${categoryNews.thumbnail_url}" class="w-100" alt="...">
+                        <img src="${categoryNews.thumbnail_url}" class="w-100 h-100" alt="...">
                     </div>
                     <div class="col-md-8 pt-5">
                         <div class="card-body">
                             <h5 class="card-title ps-5">${categoryNews.title}</h5>
-                            <p class="card-text ps-5">${categoryNews.details.length > 200 ? categoryNews.details.slice(0, 200) + '...' : categoryNews.details}</p>
-                            <div>
-                            <div class="d-flex justify-content-around align-items-center mt-5">
-                                <div class="d-flex align-items-center">
+                            <p class="card-text ps-5">${categoryNews.details.length > 300 ? categoryNews.details.slice(0, 300) + '...' : categoryNews.details}</p>
+                            <div class="d-flex justify-content-between justify-content-md-evenly align-items-center mt-5 my-1">
+                                <div class="d-flex flex-column flex-md-row align-items-center justify-content-center ">
                                     <div>
-                                        <img style="width:60px; border-radius:50px" src="${categoryNews.author.img}" alt="" />
+                                        <img style="width:60px; border-radius:50px" src="${categoryNews.author.img ? categoryNews.author.img : 'No Images to show'}" alt="" />
                                     </div>
-                                    <div class="ps-2 text-muted">
+                                    <div class="ps-2 text-muted d-flex flex-column align-items-center">
                                         <p>
-                                            <small>${categoryNews.author?.name ? categoryNews.author?.name : 'No Name Found'}</small>
+                                            <small>Name: ${categoryNews.author?.name ? categoryNews.author?.name : 'No Name Found'}</small>
                                         </p>
-                                        <p><small>
+                                        <p><small class="text-wrap">
                                         ${categoryNews.author?.published_date ? categoryNews.author?.published_date : 'No Date Found'}
                                         </small></p>
                                     </div>
@@ -80,14 +78,13 @@ const displayNews = (categoriesNews) => {
                                     <p><i class="bi bi-eye"></i> ${categoryNews.total_view ? categoryNews.total_view : 'No Data Available'}</p>
                                 </div>
                                 <div>
-                                    <p class="text-warning">${categoryNews.rating.number} <i class="bi bi-star-fill"></i></p>
+                                    <p class="text-warning">${categoryNews.rating.number ? categoryNews.rating.number : 'No Rating Found'} <i class="bi bi-star-fill"></i></p>
                                 </div>
                                 <div>
                                     <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#exampleModal"onclick="loadDetails('${categoryNews._id}')">
                                     <i class="bi bi-arrow-right"></i>
                                     </button>
                                 </div>
-                            </div>
                             </div>
                         </div>
                     </div>
@@ -122,9 +119,9 @@ const displayDetails = (details) => {
     newsTitle.innerText = `${details[0].title}`
     detailsContainer.innerHTML = `
     <div class="text-center">
-        <p>Author: ${details[0].author.name ? details[0].author.name : 'No Result found'}</p>
-        <img style="width:50px;" src="${details[0].author?.img ? details[0].author.img : 'No Result found'}" alt="" />
-        <p>Publish Date: ${details[0].author ? details[0].author.published_date : 'No Result found'}</p>
+        <p>Author: ${details[0].author.name ? details[0].author.name : 'No Name Found'}</p>
+        <img style="width:50px;" src="${details[0].author?.img ? details[0].author.img : 'No Image Found'}" alt="" />
+        <p>Publish Date: ${details[0].author.published_date ? details[0].author.published_date : 'No Date Found'}</p>
     </div>
     <div class="d-flex justify-content-between" >
         <p class="text-warning">Rating: ${details[0].rating ? details[0].rating.number : 'No Rating Found'} <i class="bi bi-star-fill"></i> </p>
@@ -136,10 +133,8 @@ const displayDetails = (details) => {
             <img src="${details[0].thumbnail_url ? details[0].thumbnail_url : 'No Image Found'}" alt="" />
         </div>
         <h3>Details:</h3>
-        <p><small>${details[0].details ? details[0].details : 'No Details Found'}</small></p>
+        <p><small>${details[0].details ? details[0].details.slice(0, 1000) + '...' : 'No Details Found'}</small></p>
     </div>
-    
-    `
+    `;
 }
 loadCategories();
-// loadNews('')
