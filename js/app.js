@@ -65,8 +65,9 @@ const displayNews = (categoriesNews) => {
                                     <p class="text-warning">${categoryNews.rating.number} <i class="bi bi-star-fill"></i></p>
                                 </div>
                                 <div>
-                                    <button class="btn btn-info text-white" onclick="loadDetails('${categoryNews._id}')">
-                                    <i class="bi bi-arrow-right"></i></button>
+                                    <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#exampleModal"onclick="loadDetails('${categoryNews._id}')">
+                                    <i class="bi bi-arrow-right"></i>
+                                    </button>
                                 </div>
                             </div>
                             </div>
@@ -81,8 +82,26 @@ const loadDetails = (news_id) => {
     const url = `https://openapi.programming-hero.com/api/news/${news_id}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => console.log(data.data))
+        .then(data => displayDetails(data.data))
         .catch(err => clg(err));
 }
+const displayDetails = (details) => {
+    console.log(details);
+    const detailsContainer = document.getElementById('details');
+    detailsContainer.innerHTML = `
+    <div class="text-center">
+        <p>Author: ${details[0].author ? details[0].author.name : 'No Result found'}</p>
+        <img style="width:50px;" src="${details[0].author ? details[0].author.img : 'No Result found'}" alt="" />
+        <p>Publish Date: ${details[0].author ? details[0].author.published_date : 'No Result found'}</p>
+    </div>
+    <div>
+        <div class="text-center">
+            <img src="${details[0].thumbnail_url}" alt="" />
+        </div>
+        <h3>Details:</h3>
+        <p><small>${details[0].details}</small></p>
+    </div>
+    `
+}
 loadCategories();
-loadNews('');
+loadNews('')
