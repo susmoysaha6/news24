@@ -25,21 +25,24 @@ const loadNews = (category_id) => {
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => displayNews(data.data))
+        .then(data => displayNews(data))
         .catch(err => console.log(err));
     toggleSpinner(true);
 }
 // display category wise news
 const displayNews = (categoriesNews) => {
-
+    console.log(categoriesNews);
+    const categoriesNewsData = categoriesNews.data;
     const newsContainer = document.getElementById('news-conatainer');
+    const newsCount = document.getElementById('news-count');
     newsContainer.textContent = '';
-    categoriesNews.forEach(categoryNews => {
+    newsCount.textContent = '';
+    categoriesNewsData.forEach(categoryNews => {
         console.log(categoryNews);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('card');
         newsDiv.classList.add('mb-3');
-
+        newsCount.innerText = `${categoriesNews.status === 'false' ? 'No News Found' : categoriesNewsData.length + ' News found for this categories'}`;
         newsDiv.innerHTML = `
         <div class="row g-0 shadow-lg">
                     <div class="col-md-4">
@@ -99,7 +102,7 @@ const loadDetails = (news_id) => {
     fetch(url)
         .then(res => res.json())
         .then(data => displayDetails(data.data))
-        .catch(err => clg(err));
+        .catch(err => console.log(err));
 }
 // display news details
 const displayDetails = (details) => {
