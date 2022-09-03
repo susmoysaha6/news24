@@ -9,6 +9,9 @@
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- css link  -->
+    <link rel="stylesheet" href="/styles/style.css">
+
 </head>
 
 <body>
@@ -39,8 +42,32 @@
             </div>
         </nav>
         <!-- nav bar section end -->
+        <!-- categories section started -->
+        <ul id="categories" class="nav justify-content-center">
+
+        </ul>
+        <!-- categories section end -->
     </header>
-    <h1>News</h1>
+    <main class="my-3 container">
+        <!-- display news start -->
+        <div id="news-conatainer" class="card mb-3 w-75 mx-auto">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="..." class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                            additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- display news end -->
+
+    </main>
     <!-- bootstrap js  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
