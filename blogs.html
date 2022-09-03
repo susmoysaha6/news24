@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Blogs</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
@@ -13,8 +13,8 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><span class="bg-info text-white px-2 py-1 rounded">News24</span>
-                    Portal</a>
+                <a class="navbar-brand" href="#"><span class="bg-info text-white px-2 py-1 rounded">News24.</span>
+                    COM</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -52,13 +52,27 @@
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <strong>This is the first item's accordion body.</strong> It is shown by default, until the
-                        collapse
-                        plugin adds the appropriate classes that we use to style each element. These classes control the
-                        overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of
-                        this with custom CSS or overriding our default variables. It's also worth noting that just about
-                        any
-                        HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        <strong>Var</strong>
+                        <li>The scope of a var variable is functional scope.</li>
+                        <li>It can be updated and re-declared into the scope.</li>
+                        <li>It can be declared without initialization.</li>
+                        <li>It can be accessed without initialization as its default value is “undefined”.</li>
+                        <li>hoisting done , with initializing as 'default' value</li>
+                        <strong>Let</strong>
+                        <li>The scope of a let variable is block scope.</li>
+                        <li>It can be updated but cannot be re-declared into the scope.</li>
+                        <li>It can be declared without initialization.</li>
+                        <li>It cannot be accessed without initialization otherwise it will give 'referenceError'.</li>
+                        <li>Hoisting is done , but not initialized (this is the reason for error when we access the let
+                            variable before declaration/initialization)</li>
+                        <strong>Const</strong>
+                        <li>The scope of a const variable is block scope</li>
+                        <li>It cannot be updated or re-declared into the scope.</li>
+                        <li>It cannot be declared without initialization.</li>
+                        <li>It cannot be accessed without initialization, as it cannot be declared without
+                            initialization.</li>
+                        <li>Hoisting is done, but not initialized (this is the reason for error when we access the const
+                            variable before declaration/initialization</li>
                     </div>
                 </div>
             </div>
@@ -72,14 +86,12 @@
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the
-                        collapse plugin adds the appropriate classes that we use to style each element. These classes
-                        control the overall appearance, as well as the showing and hiding via CSS transitions. You can
-                        modify any of this with custom CSS or overriding our default variables. It's also worth noting
-                        that
-                        just about any HTML can go within the <code>.accordion-body</code>, though the transition does
-                        limit
-                        overflow.
+                        <strong>Regular function</strong>
+                        <li>Regular function has own 'this'.</li>
+                        <li>Arguments objects are available in regular functions.</li>
+                        <strong>Arrow function</strong>
+                        <li>Unlike regular functions, arrow functions do not have their own this.</li>
+                        <li>Arguments objects are not available in arrow functions</li>
                     </div>
                 </div>
             </div>
@@ -93,14 +105,24 @@
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-                        collapse plugin adds the appropriate classes that we use to style each element. These classes
-                        control the overall appearance, as well as the showing and hiding via CSS transitions. You can
-                        modify any of this with custom CSS or overriding our default variables. It's also worth noting
-                        that
-                        just about any HTML can go within the <code>.accordion-body</code>, though the transition does
-                        limit
-                        overflow.
+                        <strong>Foreach</strong>
+                        <p>Foreach takes a callback function and run that callback function on each element of array one
+                            by one.
+                            Basically forEach works as a traditional for loop looping over the array and providing you
+                            array elements to do operations on them.</p>
+                        <strong>Map</strong>
+                        <p>Map like foreach takes a callback and run it against every element on the array but
+                            whats makes it unique is it generate a new array based on your existing array.The provided
+                            callback to map modifies the array elements and save them into the new array upon completion
+                            that array get returned as the mapped array.</p>
+                        <strong>Filter</strong>
+                        <p>filter executes the callback and check its return value. If the value is true element remains
+                            in the resulting array but if the return value is false the element will be removed for the
+                            resulting array.Filter does not update the existing array it will return a new filtered
+                            array every time.</p>
+                        <strong>Find</strong>
+                        <p>The main difference between filter and find is, find method return the only first match not a
+                            array</p>
                     </div>
                 </div>
             </div>
@@ -114,14 +136,25 @@
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
                     data-bs-parent="#accordionExample">
                     <div class="accordion-body">
-                        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
-                        collapse plugin adds the appropriate classes that we use to style each element. These classes
-                        control the overall appearance, as well as the showing and hiding via CSS transitions. You can
-                        modify any of this with custom CSS or overriding our default variables. It's also worth noting
-                        that
-                        just about any HTML can go within the <code>.accordion-body</code>, though the transition does
-                        limit
-                        overflow.
+                        <strong>Template String</strong>
+                        <p>Template strings are a powerful feature of modern JavaScript released in ES6. It lets us
+                            insert/interpolate variables and expressions into strings without needing to concatenate
+                            like in older versions of JavaScript. It allows us to create strings that are complex and
+                            contain dynamic elements. Another great thing that comes with template strings are tags.
+                            Tags are functions that take a string and the decomposed parts of the string as parameters
+                            and are great for converting strings to different entities</p>
+                        <li>We insert a variable or expression by adding a dollar sign $ and curly braces {} into the
+                            string `${variable}`. This is much better than the alternative in old JavaScript where we
+                            had to concatenate a string</li>
+                        <li>Another great feature of template strings is that we can have strings with multiple lines
+                            for better code readability. This cannot be done in an easy way with the old style of
+                            strings, we had to concatenate each line of the string to put long strings in multiple lines
+                        </li>
+                        <li>
+                            Template strings can be nested in each other. This is a great feature because many people
+                            want to create dynamic strings. Template strings allow us to nest regular strings or
+                            template strings within template strings.
+                        </li>
                     </div>
                 </div>
             </div>
