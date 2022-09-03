@@ -22,18 +22,60 @@ const loadNews = (category_id) => {
     const url = `https://openapi.programming-hero.com/api/news/category/${category_id}`;
     fetch(url)
         .then(res => res.json())
-        .then(data => console.log(data.data))
+        .then(data => displayNews(data.data))
         .catch(err => console.log(err));
 }
 const displayNews = (categoriesNews) => {
     const newsContainer = document.getElementById('news-conatainer');
+    newsContainer.textContent = '';
     categoriesNews.forEach(categoryNews => {
         console.log(categoryNews);
         const newsDiv = document.createElement('div');
-        newsDiv.classList.add('row');
-        newsDiv.classList.add('g-0');
-        newsDiv.innerHTML
+        newsDiv.classList.add('card');
+        newsDiv.classList.add('mb-3');
+
+        newsDiv.innerHTML = `
+        <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="${categoryNews.thumbnail_url}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">${categoryNews.title}</h5>
+                            <p class="card-text">${categoryNews.details.length > 200 ? categoryNews.details.slice(0, 200) + '...' : categoryNews.details}</p>
+                            <div>
+                            <div class="d-flex justify-content-around align-items-center mt-3">
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <img style="width:60px; border-radius:50px" src="${categoryNews.author.img}" alt="" />
+                                    </div>
+                                    <div class="ps-2 text-muted">
+                                        <p>
+                                            <small>${categoryNews.author.name}</small>
+                                        </p>
+                                        <p><small>
+                                        ${categoryNews.author.published_date}
+                                        </small></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p><i class="bi bi-eye"></i> ${categoryNews.total_view}</p>
+                                </div>
+                                <div>
+                                    <p class="text-warning">${categoryNews.rating.number} <i class="bi bi-star-fill"></i></p>
+                                </div>
+                                <div>
+                                    <a onclick="loadDetails()" href=""><i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+        `;
+        newsContainer.appendChild(newsDiv);
     })
 }
 
 loadCategories();
+loadNews('');
